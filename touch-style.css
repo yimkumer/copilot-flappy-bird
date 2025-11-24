@@ -1,0 +1,7 @@
+/* Prevent the canvas or game container from scrolling/zooming on touch */
+canvas, #game, .game-canvas {
+  touch-action: none;      /* prevent default browser gestures on supported browsers */
+  -ms-touch-action: none;  /* IE11 */
+  -webkit-user-select: none;
+  user-select: none;
+}

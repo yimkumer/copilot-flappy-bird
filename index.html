@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flappy Bird - Mobile Ready</title>
+  
+  <!-- Mobile tap support: Prevent touch scrolling/zooming on game elements -->
+  <link rel="stylesheet" href="touch-style.css">
+  
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background-color: #70c5ce;
+      font-family: Arial, sans-serif;
+    }
+    
+    #game {
+      background-color: #fff;
+      border: 2px solid #333;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    
+    .game-info {
+      text-align: center;
+      margin-top: 20px;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <canvas id="game" width="400" height="600"></canvas>
+    <div class="game-info">
+      <p>Tap screen, click, or press Space/Arrow Up/W/K to play!</p>
+    </div>
+  </div>
+
+  <!-- Mobile tap support: Unified input handler (touch, mouse, keyboard) -->
+  <script src="touch-input.js"></script>
+  
+  <!-- Mobile tap support: Integration layer to connect input events to game logic -->
+  <script src="game-input-integration.js"></script>
+  
+  <!-- Game script would be included here -->
+  <!-- <script src="game.js"></script> -->
+  
+  <script>
+    // Simple demo to show that mobile tap support is working
+    // Replace this with your actual Flappy Bird game logic
+    
+    const canvas = document.getElementById('game');
+    const ctx = canvas.getContext('2d');
+    
+    let score = 0;
+    let lastTapTime = 0;
+    
+    // Example flap function that the game-input-integration.js will call
+    function flap() {
+      const now = Date.now();
+      if (now - lastTapTime < 100) return; // Simple debounce for demo
+      lastTapTime = now;
+      
+      score++;
+      
+      // Visual feedback
+      ctx.fillStyle = '#70c5ce';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      
+      ctx.fillStyle = '#333';
+      ctx.font = '48px Arial';
+      ctx.textAlign = 'center';
+      ctx.fillText('Taps: ' + score, canvas.width / 2, canvas.height / 2);
+      
+      ctx.font = '16px Arial';
+      ctx.fillText('Mobile tap support working!', canvas.width / 2, canvas.height / 2 + 40);
+      
+      console.log('Flap called! Taps:', score);
+    }
+    
+    // Initialize display
+    flap();
+    score = 0; // Reset after initial draw
+  </script>
+</body>
+</html>
